@@ -30,9 +30,17 @@ Meteor.methods({
     var icons = fs.readdirSync(iconPath);
 
     var min = Math.ceil(0);
-    var max = Math.ceil(250);
+    var max = Math.ceil(721);
     var random = Math.floor(Math.random() * (max-min) + min);
 
     return Pokemon.insert({image: icons[random], longitude: long, latitude: lat});
+  },
+  'pokemon.subtract': function(x){
+    var user = this.userId;
+    if(!user){
+      console.log('user not signed in');
+      return;
+    }
+    return Pokemon.remove(x);
   }
 });

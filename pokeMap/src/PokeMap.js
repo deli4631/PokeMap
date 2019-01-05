@@ -148,6 +148,16 @@ class PokeMap extends React.Component{
             console.log('add function', err, res);
         })
     }
+    removePokemon = () => {
+        if(this.props.pokemon.length === 0){
+            return;
+        }
+        var remove = this.props.pokemon[0]._id;
+
+        Meteor.call("pokemon.subtract", remove, (err, res)=>{
+            console.log('remove fucntion', err, res);
+        })
+    }
     renderPokemon = () =>{
         return this.props.pokemon.map(p=>{
             return(
@@ -163,6 +173,11 @@ class PokeMap extends React.Component{
             )
         })
     }
+    logout = () =>{
+        Meteor.logout();
+        this.props.flipLogin(false);
+
+    }
     render(){
         console.log(this.props.pokemon);
         return(
@@ -175,7 +190,7 @@ class PokeMap extends React.Component{
                         <Title>PokeMap</Title>
                     </Body>
                     <Right>
-                        <Button transparent>
+                        <Button transparent onPress={this.logout}>
                             <Icon name ="power"/>
                         </Button>
                     </Right>
@@ -197,8 +212,10 @@ class PokeMap extends React.Component{
                     <Icon name="add"/>
                 </Fab>
 
-                <Fab direction="right" position="bottomLeft"
+                <Fab direction="right" 
+                    position="bottomLeft"
                     style = {{backgroundColor: 'red'}}
+                    onPress={this.removePokemon}
                 >
                     <Icon name="remove"/>
                 </Fab>

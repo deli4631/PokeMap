@@ -52,7 +52,7 @@ export default class App extends React.Component {
     }
     else {
       return(
-        <PokeMap />
+        <PokeMap flipLogin={this.flipLogin}/>
       )
     }
   }
