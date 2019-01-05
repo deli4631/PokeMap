@@ -15,7 +15,7 @@ export default class App extends React.Component {
    * want to do something before we start seeing stuff onscreen happens
    */
   state = {
-    loggedIn: true
+    loggedIn: false
   }
   componentWillMount(){
     Meteor.connect(SERVER_URL);
